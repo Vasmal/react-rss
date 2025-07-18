@@ -13,10 +13,19 @@ export default class App extends Component {
       : null,
   };
 
+  handleStateChange = (searchValue: string) => {
+    this.setState({
+      searchQuery: searchValue,
+    });
+  };
+
   render() {
     return (
       <>
-        <Header />
+        <Header
+          searchQuery={this.state.searchQuery ? this.state.searchQuery : ''}
+          handleStateChange={this.handleStateChange}
+        />
         <Main />
       </>
     );
