@@ -15,13 +15,13 @@ class Search extends Component<Props, State> {
   };
 
   handleClick = (value: string) => {
-    this.props.onButtonClick(value);
-    this.setItem(value);
+    const trimedValue = value.trim();
+    this.props.onButtonClick(trimedValue);
+    if (trimedValue !== localStorage.getItem('searchQuery')) {
+      localStorage.setItem('searchQuery', trimedValue);
+    }
   };
 
-  setItem = (value: string) => {
-    localStorage.setItem('searchQuery', value);
-  };
   render() {
     return (
       <div>
