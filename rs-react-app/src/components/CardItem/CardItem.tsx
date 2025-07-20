@@ -18,12 +18,14 @@ const CardItem = ({
   stargazers_count,
 }: Props) => {
   return (
-    <div className={styles.Cardcontainer}>
+    <div className={styles.CardContainer}>
       <div className={styles.name}>
-        <span className={styles.cardName}>{full_name}</span>
+        <span className={styles.label}>repo name:</span>{' '}
+        <h2 className={styles.cardName}>{full_name}</h2>
         <p className={styles.description}>{description}</p>
       </div>
       <div className={styles.links}>
+        <span className={styles.label}>links:</span>
         <a
           href={`${clone_url}`}
           className={styles.link}
@@ -43,8 +45,14 @@ const CardItem = ({
           </a>
         )}
       </div>
-      <div className={styles.language}>{language}</div>
-      <div className={styles.stars}>{stargazers_count}</div>
+      <div className={styles.language}>
+        {' '}
+        <span className={styles.label}>programming language: </span>
+        {language}
+      </div>
+      <div className={styles.stars}>
+        <span className={styles.label}>stars: </span> {stargazers_count}
+      </div>
     </div>
   );
 };
