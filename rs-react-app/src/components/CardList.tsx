@@ -2,6 +2,7 @@ import { Component } from 'react';
 import getData, { type FetchedItem } from '../features/get-data';
 import CardItem from './CardItem/CardItem';
 import ErrorButton from './ErrorButton';
+import Loader from './Loader/Loader';
 
 export type RepoParams = {
   id: number;
@@ -72,7 +73,7 @@ class CardList extends Component<Props, State> {
     const { error, loading, repos } = this.state;
 
     if (loading) {
-      return <p>Loading data...</p>;
+      return <Loader />;
     }
 
     if (error) {

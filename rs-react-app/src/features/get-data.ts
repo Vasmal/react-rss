@@ -1,4 +1,4 @@
-import type { RepoParams } from '../components/Main';
+import type { RepoParams } from '../components/Main/Main';
 
 const BASE_URL = 'https://api.github.com/';
 
