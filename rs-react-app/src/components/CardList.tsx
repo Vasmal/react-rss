@@ -45,7 +45,6 @@ class CardList extends Component<Props, State> {
     try {
       const data = await getData(query);
       this.setState({ repos: this.formatData(data), error: null });
-      console.log(data);
     } catch (error) {
       if (error instanceof Error) {
         this.setState({ error });
