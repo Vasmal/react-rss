@@ -1,8 +1,8 @@
 import Search from '../Search/Search';
 import { Component } from 'react';
-import CardList from '../CardList';
 import ErrorBoundary from '../ErrorBoundary';
 import styles from './Main.module.css';
+import CardListContainer from '../CardListContainer';
 
 type StateParams = {
   searchQuery: string | null;
@@ -38,7 +38,7 @@ export default class Main extends Component {
         </header>
         <main>
           <ErrorBoundary>
-            <CardList searchQuery={this.state.searchQuery || ''} />
+            <CardListContainer searchQuery={this.state.searchQuery || ''} />
           </ErrorBoundary>
         </main>
       </div>
