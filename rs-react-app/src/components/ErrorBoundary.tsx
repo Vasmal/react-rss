@@ -18,10 +18,6 @@ class ErrorBoundary extends Component<Props, State> {
     console.error(error, errorInfo);
   }
 
-  refresh = () => {
-    location.reload();
-  };
-
   render() {
     if (this.state.error) {
       return (
@@ -30,7 +26,9 @@ class ErrorBoundary extends Component<Props, State> {
             Something went wrong, please refresh this page by clicking the
             refresh button!
           </p>
-          <button onClick={this.refresh}>Refresh Button</button>
+          <button onClick={() => this.setState({ error: null })}>
+            Reset Button
+          </button>
         </div>
       );
     }
