@@ -1,13 +1,5 @@
+import type { RepoParams } from '../CardListContainer';
 import styles from './CardItem.module.css';
-
-type Props = {
-  full_name: string;
-  clone_url: string;
-  description: string | null;
-  homepage?: string | null;
-  language?: string | null;
-  stargazers_count: number;
-};
 
 const CardItem = ({
   full_name,
@@ -16,7 +8,7 @@ const CardItem = ({
   homepage,
   language,
   stargazers_count,
-}: Props) => {
+}: RepoParams) => {
   return (
     <div className={styles.CardContainer}>
       <div className={styles.name}>
