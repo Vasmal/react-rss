@@ -30,6 +30,8 @@ class CardListContainer extends Component<Props, State> {
     repos: [],
   };
 
+  private controller: null | AbortController = null;
+
   async componentDidMount() {
     this.fetchData(this.props.searchQuery);
   }
@@ -40,12 +42,29 @@ class CardListContainer extends Component<Props, State> {
     }
   }
 
+  componentWillUnmount(): void {
+    if (this.controller) {
+      this.controller.abort();
+    }
+  }
+
   fetchData = async (query: string) => {
-    this.setState({ loading: true, error: null });
+    if (this.controller) {
+      this.controller.abort();
+    }
+
+    this.controller = new AbortController();
+    this.setState({
+      loading: true,
+      error: null,
+    });
     try {
-      const data = await getData(query);
+      const data = await getData(query, this.controller.signal);
       this.setState({ repos: this.formatData(data), error: null });
     } catch (error) {
+      if (error instanceof Error && error.name === 'AbortError') {
+        return;
+      }
       if (error instanceof Error) {
         this.setState({ error });
       }
