@@ -16,10 +16,10 @@ class Search extends Component<Props, State> {
   };
 
   handleClick = (value: string) => {
-    if (!value) {
+    const trimedValue = value.trim();
+    if (!trimedValue) {
       return;
     }
-    const trimedValue = value.trim();
     this.props.onButtonClick(trimedValue);
     if (trimedValue !== localStorage.getItem('searchQuery')) {
       localStorage.setItem('searchQuery', trimedValue);
@@ -40,7 +40,7 @@ class Search extends Component<Props, State> {
           className={styles.search_button}
           onClick={() => this.handleClick(this.state.input)}
         >
-          Add
+          Search
         </button>
       </div>
     );
