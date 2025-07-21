@@ -4,16 +4,6 @@ import CardList from '../CardList';
 import ErrorBoundary from '../ErrorBoundary';
 import styles from './Main.module.css';
 
-export type RepoParams = {
-  id: number;
-  full_name: string;
-  clone_url: string;
-  description: string;
-  homepage?: string;
-  language?: string;
-  stargazers_count: number;
-};
-
 type StateParams = {
   searchQuery: string | null;
 };
