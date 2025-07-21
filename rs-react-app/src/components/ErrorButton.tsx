@@ -12,7 +12,7 @@ class ErrorButton extends Component {
   render() {
     const { isError } = this.state;
     if (isError) {
-      throw new Error('An error occured due to Error Button click');
+      throw new Error('An error occurred due to Error Button click');
     }
 
     return <button onClick={this.handleClick}>Error Button</button>;
