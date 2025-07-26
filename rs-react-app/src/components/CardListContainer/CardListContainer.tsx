@@ -2,7 +2,7 @@ import { Component } from 'react';
 import getData, { type FetchedItem } from '../features/get-data';
 import ErrorButton from './ErrorButton';
 import Loader from './Loader/Loader';
-import CardList from './CardList';
+import CardList from './CardList/CardList';
 
 export type RepoParams = {
   id: number;
