@@ -1,4 +1,4 @@
-import type { RepoParams } from '../CardListContainer';
+import type { RepoParams } from '../CardListContainer/CardListContainer';
 import styles from './CardItem.module.css';
 
 const CardItem = ({
@@ -10,7 +10,7 @@ const CardItem = ({
   stargazers_count,
 }: RepoParams) => {
   return (
-    <div className={styles.CardContainer}>
+    <div className={styles.CardContainer} data-testid="card-item">
       <div className={styles.name}>
         <span className={styles.label}>repo name:</span>{' '}
         <h2 className={styles.cardName}>{full_name}</h2>
@@ -40,7 +40,7 @@ const CardItem = ({
       <div className={styles.language}>
         {' '}
         <span className={styles.label}>programming language: </span>
-        {language}
+        {language ?? ''}
       </div>
       <div className={styles.stars}>
         <span className={styles.label}>stars: </span> {stargazers_count}

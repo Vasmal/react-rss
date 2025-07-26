@@ -2,7 +2,7 @@ import Search from '../Search/Search';
 import { Component } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import styles from './Main.module.css';
-import CardListContainer from '../CardListContainer';
+import CardListContainer from '../CardListContainer/CardListContainer';
 
 type StateParams = {
   searchQuery: string | null;
