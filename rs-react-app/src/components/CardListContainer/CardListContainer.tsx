@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import getData, { type FetchedItem } from '../features/get-data';
-import ErrorButton from './ErrorButton';
-import Loader from './Loader/Loader';
-import CardList from './CardList/CardList';
+import getData, { type FetchedItem } from '../../features/get-data';
+import ErrorButton from '../ErrorButton/ErrorButton';
+import Loader from '../Loader/Loader';
+import CardList from '../CardList/CardList';
 
 export type RepoParams = {
   id: number;
@@ -95,7 +95,7 @@ class CardListContainer extends Component<Props, State> {
     }
 
     if (error) {
-      return <p>{error.message}</p>;
+      return <p data-testid="error">{error.message}</p>;
     }
 
     if (repos.length === 0) {
@@ -103,7 +103,7 @@ class CardListContainer extends Component<Props, State> {
     }
 
     return (
-      <div>
+      <div data-testid="card-list-container">
         <CardList repos={repos} />
         <ErrorButton />
       </div>

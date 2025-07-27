@@ -28,8 +28,8 @@ export default class Main extends Component {
             Search repositories by name or topic and select your preferred one
           </p>
           <p className={styles.search_examples}>
-            {`Try: 'javascript framework', 'python bot', 'mobile game', or any tech
-          stack`}
+            {`Try: 'javascript framework', 'python bot', 'mobile game', or any
+            tech stack`}
           </p>
           <Search
             searchQuery={this.state.searchQuery || ''}

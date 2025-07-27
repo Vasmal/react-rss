@@ -18,7 +18,7 @@ export default defineConfig({
       '**/.{idea,git,cache,output,temp}/**',
     ],
     coverage: {
-      provider: 'v8', // можно 'c8', 'istanbul' — если нужно
+      provider: 'v8',
       reporter: ['text', 'html'],
       include: ['src/**/*.{js,jsx,ts,tsx}'],
       exclude: [

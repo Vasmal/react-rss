@@ -47,4 +47,24 @@ describe('ErrorButton', () => {
     expect(screen.getByTestId('errorButton')).toBeInTheDocument();
     expect(screen.queryByText(/Something went wrong/)).not.toBeInTheDocument();
   });
+  it('should reset error state when reset button is clicked', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <ErrorBoundary>
+        <ErrorButton />
+      </ErrorBoundary>
+    );
+
+    const errorButton = screen.getByTestId('errorButton');
+    await user.click(errorButton);
+
+    expect(screen.getByText(/Something went wrong/)).toBeInTheDocument();
+
+    const resetButton = screen.getByText('Reset Button');
+    await user.click(resetButton);
+
+    expect(screen.getByTestId('errorButton')).toBeInTheDocument();
+    expect(screen.queryByText(/Something went wrong/)).not.toBeInTheDocument();
+  });
 });
