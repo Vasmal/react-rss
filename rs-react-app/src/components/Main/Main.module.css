@@ -1,0 +1,14 @@
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+h1 {
+  margin-bottom: 15px;
+}
