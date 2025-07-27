@@ -21,7 +21,7 @@
     "**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write",
-      "vitest run --related --passWithNoTests"
+      "npm run test:changed"
     ],
     "**/*.{css,scss,sass}": [
       "prettier --write"
