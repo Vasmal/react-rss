@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import styles from './Search.module.css';
 
 type Props = {
@@ -6,45 +6,36 @@ type Props = {
   onButtonClick: (value: string) => void;
 };
 
-type State = {
-  input: string;
-};
-
-class Search extends Component<Props, State> {
-  state: State = {
-    input: this.props.searchQuery,
-  };
-
-  handleClick = (value: string) => {
+const Search = ({ searchQuery, onButtonClick }: Props) => {
+  const [input, setInput] = useState<string>(searchQuery);
+  const handleClick = (value: string) => {
     const trimedValue = value.trim();
     if (!trimedValue) {
       return;
     }
-    this.props.onButtonClick(trimedValue);
+    onButtonClick(trimedValue);
     if (trimedValue !== localStorage.getItem('searchQuery')) {
       localStorage.setItem('searchQuery', trimedValue);
     }
   };
 
-  render() {
-    return (
-      <div className={styles.container} data-testid="search">
-        <input
-          className={styles.search_field}
-          type="text"
-          placeholder="Search repositories..."
-          value={this.state.input}
-          onChange={(e) => this.setState({ input: e.target.value })}
-        />
-        <button
-          className={styles.search_button}
-          onClick={() => this.handleClick(this.state.input)}
-        >
-          Search
-        </button>
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.container} data-testid="search">
+      <input
+        className={styles.search_field}
+        type="text"
+        placeholder="Search repositories..."
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button
+        className={styles.search_button}
+        onClick={() => handleClick(input)}
+      >
+        Search
+      </button>
+    </div>
+  );
+};
 
 export default Search;

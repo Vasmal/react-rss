@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import getData, { type FetchedItem } from '../../features/get-data';
 import ErrorButton from '../ErrorButton/ErrorButton';
 import Loader from '../Loader/Loader';
@@ -14,66 +14,51 @@ export type RepoParams = {
   stargazers_count: number;
 };
 
-type State = {
-  loading: boolean;
-  error: Error | null;
-  repos: RepoParams[];
-};
-
 type Props = {
   searchQuery: string;
 };
-class CardListContainer extends Component<Props, State> {
-  state: State = {
-    loading: true,
-    error: null,
-    repos: [],
-  };
 
-  private controller: null | AbortController = null;
+const CardListContainer = ({ searchQuery }: Props) => {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [repos, setRepos] = useState<RepoParams[]>([]);
 
-  async componentDidMount() {
-    this.fetchData(this.props.searchQuery);
-  }
+  useEffect(() => {
+    let controller: null | AbortController = null;
 
-  async componentDidUpdate(prevProps: Props) {
-    if (prevProps.searchQuery !== this.props.searchQuery) {
-      this.fetchData(this.props.searchQuery);
-    }
-  }
-
-  componentWillUnmount(): void {
-    if (this.controller) {
-      this.controller.abort();
-    }
-  }
-
-  fetchData = async (query: string) => {
-    if (this.controller) {
-      this.controller.abort();
-    }
-
-    this.controller = new AbortController();
-    this.setState({
-      loading: true,
-      error: null,
-    });
-    try {
-      const data = await getData(query, this.controller.signal);
-      this.setState({ repos: this.formatData(data), error: null });
-    } catch (error) {
-      if (error instanceof Error && error.name === 'AbortError') {
-        return;
+    const fetchData = async (query: string) => {
+      if (controller) {
+        controller.abort();
       }
-      if (error instanceof Error) {
-        this.setState({ error });
-      }
-    } finally {
-      this.setState({ loading: false });
-    }
-  };
 
-  formatData = (data: FetchedItem[]) => {
+      controller = new AbortController();
+      setLoading(true);
+      setError(null);
+
+      try {
+        const data = await getData(query, controller.signal);
+        setRepos(formatData(data));
+      } catch (error) {
+        if (error instanceof Error && error.name === 'AbortError') {
+          return;
+        }
+        if (error instanceof Error) {
+          setError(error);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData(searchQuery);
+
+    return () => {
+      if (controller) {
+        controller.abort();
+      }
+    };
+  }, [searchQuery]);
+
+  const formatData = (data: FetchedItem[]) => {
     const formattedData: RepoParams[] = data.map((repo) => ({
       id: repo.id,
       full_name: repo.full_name,
@@ -87,28 +72,24 @@ class CardListContainer extends Component<Props, State> {
     return formattedData;
   };
 
-  render() {
-    const { error, loading, repos } = this.state;
-
-    if (loading) {
-      return <Loader />;
-    }
-
-    if (error) {
-      return <p data-testid="error">{error.message}</p>;
-    }
-
-    if (repos.length === 0) {
-      return <p>No results found!</p>;
-    }
-
-    return (
-      <div data-testid="card-list-container">
-        <CardList repos={repos} />
-        <ErrorButton />
-      </div>
-    );
+  if (loading) {
+    return <Loader />;
   }
-}
+
+  if (error) {
+    return <p data-testid="error">{error.message}</p>;
+  }
+
+  if (repos.length === 0) {
+    return <p>No results found!</p>;
+  }
+
+  return (
+    <div data-testid="card-list-container">
+      <CardList repos={repos} />
+      <ErrorButton />
+    </div>
+  );
+};
 
 export default CardListContainer;
