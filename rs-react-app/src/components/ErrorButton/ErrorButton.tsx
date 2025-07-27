@@ -15,7 +15,11 @@ class ErrorButton extends Component {
       throw new Error('An error occurred due to Error Button click');
     }
 
-    return <button onClick={this.handleClick}>Error Button</button>;
+    return (
+      <button data-testid="errorButton" onClick={this.handleClick}>
+        Error Button
+      </button>
+    );
   }
 }
 
