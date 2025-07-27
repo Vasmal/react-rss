@@ -1,5 +1,5 @@
-import CardItem from './CardItem/CardItem';
-import type { RepoParams } from './CardListContainer';
+import CardItem from '../CardItem/CardItem';
+import type { RepoParams } from '../CardListContainer/CardListContainer';
 
 type Props = {
   repos: RepoParams[];

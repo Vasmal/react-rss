@@ -23,8 +23,8 @@ class ErrorBoundary extends Component<Props, State> {
       return (
         <div>
           <p>
-            Something went wrong, please refresh this page by clicking the
-            refresh button!
+            Something went wrong, please reset this page by clicking the reset
+            button!
           </p>
           <button onClick={() => this.setState({ error: null })}>
             Reset Button

@@ -2,7 +2,7 @@ import Search from '../Search/Search';
 import { Component } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import styles from './Main.module.css';
-import CardListContainer from '../CardListContainer';
+import CardListContainer from '../CardListContainer/CardListContainer';
 
 type StateParams = {
   searchQuery: string | null;
@@ -28,8 +28,8 @@ export default class Main extends Component {
             Search repositories by name or topic and select your preferred one
           </p>
           <p className={styles.search_examples}>
-            {`Try: 'javascript framework', 'python bot', 'mobile game', or any tech
-          stack`}
+            {`Try: 'javascript framework', 'python bot', 'mobile game', or any
+            tech stack`}
           </p>
           <Search
             searchQuery={this.state.searchQuery || ''}

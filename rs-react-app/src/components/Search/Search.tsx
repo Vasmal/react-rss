@@ -28,7 +28,7 @@ class Search extends Component<Props, State> {
 
   render() {
     return (
-      <div className={styles.container}>
+      <div className={styles.container} data-testid="search">
         <input
           className={styles.search_field}
           type="text"

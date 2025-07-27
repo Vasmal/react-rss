@@ -1,4 +1,4 @@
-import type { RepoParams } from '../components/CardListContainer';
+import type { RepoParams } from '../components/CardListContainer/CardListContainer';
 
 const BASE_URL = 'https://api.github.com/';
 
