@@ -1,13 +1,12 @@
 import Search from '../Search/Search';
-import { useState } from 'react';
+
 import ErrorBoundary from '../ErrorBoundary';
 import styles from './Main.module.css';
 import CardListContainer from '../CardListContainer/CardListContainer';
+import useSearchStorage from '../../custom-hooks/useSearchStorage';
 
 const Main = () => {
-  const [searchQuery, setSearchQuery] = useState<string | null>(
-    localStorage.getItem('searchQuery') || null
-  );
+  const { searchQuery, setSearchQuery } = useSearchStorage();
 
   const handleStateChange = (value: string) => {
     setSearchQuery(value);

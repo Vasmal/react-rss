@@ -9,14 +9,10 @@ type Props = {
 const Search = ({ searchQuery, onButtonClick }: Props) => {
   const [input, setInput] = useState<string>(searchQuery);
   const handleClick = (value: string) => {
-    const trimedValue = value.trim();
-    if (!trimedValue) {
+    if (!value) {
       return;
     }
-    onButtonClick(trimedValue);
-    if (trimedValue !== localStorage.getItem('searchQuery')) {
-      localStorage.setItem('searchQuery', trimedValue);
-    }
+    onButtonClick(value);
   };
 
   return (
